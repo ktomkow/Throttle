@@ -1,7 +1,7 @@
 
 #include <AUnit.h>
 
-#include "../src/queue.h"
+#include "../src/masterInclude.h"
 
 test(bar) {
   // Arrange
