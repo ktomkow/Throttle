@@ -1,14 +1,14 @@
 #include "enumerable.h"
 
 template<typename T>
-MyArray<T>::MyArray() {
+Collection<T>::Collection() {
   _capacity = 4;
   _size = 0;
   _collection = new T[_capacity];
 }
 
 template<typename T>
-void MyArray<T>::extend() {
+void Collection<T>::extend() {
   unsigned short newCapacity = _capacity + 2;
   T* oldCollection = _collection;
 
@@ -24,6 +24,12 @@ void MyArray<T>::extend() {
   _capacity = newCapacity;
 }
 
+
 template<typename T>
-void MyArray<T>::push(T* element) {
+void Collection<T>::push(const T& element) {
+  if (_size >= _capacity) {
+    extend();
+  }
+
+  _collection[_size++] = element;
 }
