@@ -4,18 +4,20 @@
 template<typename T>
 class Enumerator {
 public:
-  virtual void moveNext();
-  virtual T getCurrent();
+  // virtual void moveNext();
+  // virtual T* getCurrent();
 };
 
 template<typename T>
 class Enumerable {
 public:
-  virtual Enumerator<T> getEnumerator();
+  // virtual Enumerator<T> getEnumerator();
 };
 
 template<typename T>
-class MyArray : public Enumerable<T> {
+// class MyArray : public Enumerable<T> {
+class MyArray {
+
 private:
   T* _collection;
   int _capacity;

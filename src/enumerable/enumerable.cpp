@@ -12,13 +12,18 @@ void MyArray<T>::extend() {
   unsigned short newCapacity = _capacity + 2;
   T* oldCollection = _collection;
 
-  delete[] _collection;
+  T* newCollection = new T[newCapacity];
 
-  _collection = new T[newCapacity];
-
-  for (unsigned short i = 0; i < _capacity; i++) {
-    _collection[i] = oldCollection[i];
+  for (unsigned short i = 0; i < _size; i++) {
+    newCollection[i] = _collection[i];
   }
 
+  delete[] _collection;
+
+  _collection = newCollection;
   _capacity = newCapacity;
+}
+
+template<typename T>
+void MyArray<T>::push(T* element) {
 }
