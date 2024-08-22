@@ -1,6 +1,7 @@
 #ifndef masterInclude.h
 #define masterInclude.h
 
-#include "queue.h"
+#include "dataBus/dataBus.h"
+#include "enumerable/enumerable.h"
 
 #endif
