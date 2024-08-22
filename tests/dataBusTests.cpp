@@ -1,7 +1,14 @@
+#ifndef queueTests.cpp
+#define queueTests.cpp
 
 #include <AUnit.h>
 
-#include "../src/masterInclude.h"
+#include "../src/dataBus/dataBus.h"
+
+
+test(dupa) {
+  
+}
 
 // test(bar) {
 //   // Arrange
@@ -13,3 +20,6 @@
 //   // Assert
 //   assertEqual(result, 0);
 // }
+
+
+#endif
