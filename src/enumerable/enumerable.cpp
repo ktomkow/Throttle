@@ -24,6 +24,11 @@ void Collection<T>::extend() {
   _capacity = newCapacity;
 }
 
+template<typename T>
+Collection<T>::~Collection() {
+  delete[] _collection;
+}
+
 
 template<typename T>
 void Collection<T>::push(const T& element) {
@@ -32,4 +37,34 @@ void Collection<T>::push(const T& element) {
   }
 
   _collection[_size++] = element;
+}
+
+template<typename T>
+void Collection<T>::clear() {
+  _size = 0;  // Ustawienie aktualnego rozmiaru na 0
+}
+
+template<typename T>
+Collection<T>::Enumerator::Enumerator(Collection& collection) {
+  _array = &collection;
+  _currentIndex = -1;
+}
+
+template<typename T>
+T& Collection<T>::Enumerator::getCurrent() {
+  return _array.collection[_currentIndex];
+}
+
+template<typename T>
+bool Collection<T>::Enumerator::getNext() {
+  if (_currentIndex + 1 < _array.size) {
+    ++_currentIndex;
+    return true;
+  }
+  return false;
+}
+
+template<typename T>
+typename Collection<T>::Enumerator Collection<T>::getEnumerator() {
+  return Enumerator(*this);
 }

@@ -1,5 +1,5 @@
 #ifndef enumerable.h
-#define enumerable.h
+#define enumerable .h
 
 template<typename T>
 class Collection {
@@ -12,8 +12,23 @@ private:
 public:
   Collection();
   void push(const T&);
-  // ~SimpleArray();
-  // virtual Enumerator<T> getEnumerator() override;
+  void clear();
+  ~Collection();
+
+  class Enumerator {
+  private:
+    Collection* _array;
+    unsigned short _currentIndex;
+
+  public:
+    Enumerator(Collection& collection);
+
+    T& getCurrent();
+
+    bool getNext();
+  };
+
+  virtual Enumerator getEnumerator();
 };
 
 
