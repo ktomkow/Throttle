@@ -58,7 +58,7 @@ Collection<T>::Enumerator::Enumerator(Collection& collection) {
 
 template<typename T>
 T& Collection<T>::Enumerator::getCurrent() {
-  return _array.collection[_currentIndex];
+  return _array->_collection[_currentIndex];
 }
 
 template<typename T>
