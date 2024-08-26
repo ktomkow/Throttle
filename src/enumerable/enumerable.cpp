@@ -41,8 +41,14 @@ void Collection<T>::push(const T& element) {
 
 template<typename T>
 void Collection<T>::clear() {
-  _size = 0;  // Ustawienie aktualnego rozmiaru na 0
+  _size = 0;
 }
+
+template<typename T>
+int Collection<T>::getSize() {
+  return _size;
+}
+
 
 template<typename T>
 Collection<T>::Enumerator::Enumerator(Collection& collection) {
@@ -57,8 +63,8 @@ T& Collection<T>::Enumerator::getCurrent() {
 
 template<typename T>
 bool Collection<T>::Enumerator::getNext() {
-  if (_currentIndex + 1 < _array.size) {
-    ++_currentIndex;
+  if (_currentIndex + 1 < _array->getSize()) {
+    _currentIndex++;
     return true;
   }
   return false;

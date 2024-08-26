@@ -13,6 +13,7 @@ public:
   Collection();
   void push(const T&);
   void clear();
+  int getSize();
   ~Collection();
 
   class Enumerator {
