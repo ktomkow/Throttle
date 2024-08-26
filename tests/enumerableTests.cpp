@@ -43,3 +43,35 @@ test(collection_enumerator_pushAndEnumerableAndGetPushedItem) {
   // Assert
   assertEqual(13, result);
 }
+
+test(collection_enumerator_pushManyElementsAndGetThemInSameOrder) {
+  // Arrange
+  Collection<int> ints;
+
+  ints.push(1);
+  ints.push(70);
+  ints.push(12567);
+  ints.push(-257);
+  ints.push(122);
+
+  // Act
+  Collection<int>::Enumerator enumerator = ints.getEnumerator();
+  enumerator.getNext();
+  int first = enumerator.getCurrent();
+  enumerator.getNext();
+  int second = enumerator.getCurrent();
+  enumerator.getNext();
+  int third = enumerator.getCurrent();
+  enumerator.getNext();
+  int fourth = enumerator.getCurrent();
+  enumerator.getNext();
+  int fifth = enumerator.getCurrent();
+
+  // Assert
+  assertEqual(1, first);
+  assertEqual(70, second);
+  assertEqual(12567, third);
+  assertEqual(-257, fourth);
+  assertEqual(122, fifth);
+  
+}
