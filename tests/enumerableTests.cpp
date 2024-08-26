@@ -22,8 +22,8 @@ test(collection_enumerator_pushThenGetNextShouldReturnTrue) {
   ints.push(5);
 
   // Act
-  Collection<int>::Enumerator a = ints.getEnumerator();
-  bool isEmpty = a.getNext() == false;
+  Collection<int>::Enumerator enumerator = ints.getEnumerator();
+  bool isEmpty = enumerator.getNext() == false;
 
   // Assert
   assertEqual(false, isEmpty);
@@ -36,9 +36,9 @@ test(collection_enumerator_pushAndEnumerableAndGetPushedItem) {
   ints.push(13);
 
   // Act
-  Collection<int>::Enumerator a = ints.getEnumerator();
-  a.getNext();
-  int result = a.getCurrent();
+  Collection<int>::Enumerator enumerator = ints.getEnumerator();
+  enumerator.getNext();
+  int result = enumerator.getCurrent();
 
   // Assert
   assertEqual(13, result);
