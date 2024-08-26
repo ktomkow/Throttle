@@ -11,7 +11,7 @@ test(collection_initialSizeShouldBeZero) {
   int size = ints.getSize();
 
   // Assert
-  assertEqual(size, 0);
+  assertEqual(0, size);
 }
 
 
@@ -26,19 +26,20 @@ test(collection_enumerator_pushThenGetNextShouldReturnTrue) {
   bool isEmpty = a.getNext() == false;
 
   // Assert
-  assertEqual(isEmpty, false);
+  assertEqual(false, isEmpty);
 }
 
-test(collection_enumerator_) {
+test(collection_enumerator_pushAndEnumerableAndGetPushedItem) {
   // Arrange
   Collection<int> ints;
 
-  ints.push(5);
+  ints.push(13);
 
   // Act
   Collection<int>::Enumerator a = ints.getEnumerator();
-  bool isEmpty = a.getNext() == false;
+  a.getNext();
+  int result = a.getCurrent();
 
   // Assert
-  assertEqual(isEmpty, false);
+  assertEqual(13, result);
 }
