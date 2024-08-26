@@ -15,12 +15,11 @@ test(collection_initialSizeShouldBeZero) {
 }
 
 
-test(collection_push) {
+test(collection_pushAndGetEnumeratorThenGetNextShouldReturnTrue) {
   // Arrange
   Collection<int> ints;
 
   ints.push(5);
-  ints.push(1);
 
   // Act
   Collection<int>::Enumerator a = ints.getEnumerator();
