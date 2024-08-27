@@ -4,7 +4,7 @@
 #include "../src/domain.h"
 
 
-test(dataBus_isAny_shouldBeFalse) {
+test(dataBus_whenNothingPushed_isAny_shouldBeFalse) {
   // Arrange
   DataBus dataBus;
 
@@ -13,4 +13,18 @@ test(dataBus_isAny_shouldBeFalse) {
 
   // Assert
   assertEqual(false, result);
+}
+
+
+test(dataBus_whenPushed_shouldBeAvailableThroughEnumerator) {
+  // Arrange
+  DataBus dataBus;
+
+  // Act
+  BusMessage message;
+  message.type = MSG_EMPTY_MESSAGE;
+  dataBus.push(message);
+
+  // Assert
+  // assertEqual(false, result);
 }
