@@ -9,8 +9,8 @@ test(dataBus_isAny_shouldBeFalse) {
   DataBus dataBus;
 
   // Act
-  // bool result = dataBus.isAny();
+  bool result = dataBus.isAny();
 
   // Assert
-  // assertEqual(false, result);
+  assertEqual(false, result);
 }
