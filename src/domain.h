@@ -16,13 +16,13 @@ enum BusMessageType {
 };
 
 struct ButtonStateChangedPayload {
-  unsigned short id;
-  InputState newState;
+  short id;
+  InputState state;
 };
 
 struct PotentiometerStateChangedPayload {
-  unsigned short id;
-  unsigned short newState;
+  short id;
+  int state;
 };
 
 struct ConfigModeChangedPayload {

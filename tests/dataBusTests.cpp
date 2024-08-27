@@ -23,7 +23,7 @@ test(dataBus_whenPushed_shouldBeAvailableThroughEnumerator) {
   // Act
   BusMessage message;
   message.type = MSG_EMPTY_MESSAGE;
-  dataBus.push(message);
+  dataBus.publish(message);
 
   // Assert
   // assertEqual(false, result);
