@@ -73,5 +73,24 @@ test(collection_enumerator_pushManyElementsAndGetThemInSameOrder) {
   assertEqual(12567, third);
   assertEqual(-257, fourth);
   assertEqual(122, fifth);
-  
+}
+
+test(collection_whenClearedThenSizeZero_enumerator_getNextIsFalse) {
+  // Arrange
+  Collection<int> ints;
+
+  // Act
+  ints.push(5);
+  ints.push(5);
+  ints.push(5);
+  ints.push(5);
+  ints.clear();
+  int size = ints.getSize();
+
+  Collection<int>::Enumerator enumerator = ints.getEnumerator();
+  bool isEmpty = enumerator.getNext() == false;
+
+  // Assert
+  assertEqual(0, size);
+  assertEqual(true, isEmpty);
 }
