@@ -1,24 +1,24 @@
-#ifndef slopeDetector.h
-#define slopeDetector .h
+// #ifndef slopeDetector.h
+// #define slopeDetector .h
 
-#include "Arduino.h"
-#include "button.h"
+// #include "Arduino.h"
+// #include "button.h"
 
-class SlopeDetector {
-private:
-  bool _isPreinitialized;
-  bool _isInitialized;
-  ThrottleButton* _button;
-  bool _lastState;
+// class SlopeDetector {
+// private:
+//   bool _isPreinitialized;
+//   bool _isInitialized;
+//   MyBtn* _button;
+//   bool _lastState;
 
-protected:
-  virtual void onSlopeUp();
-  virtual void onSlopeDown();
+// protected:
+//   virtual void onSlopeUp();
+//   virtual void onSlopeDown();
 
-public:
-  SlopeDetector(ThrottleButton* btn);
-  void init();
-  void act();
-};
+// public:
+//   SlopeDetector(MyBtn* btn);
+//   void init();
+//   void act();
+// };
 
-#endif
+// #endif

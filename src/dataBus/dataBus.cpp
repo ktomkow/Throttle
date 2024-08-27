@@ -10,7 +10,7 @@ DataBus::~DataBus() {
   delete _messages;
 }
 
-void DataBus::push(BusMessage& busMessage) {
+void DataBus::publish(BusMessage& busMessage) {
   _messages->push(busMessage);
 }
 

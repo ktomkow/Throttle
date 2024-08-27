@@ -12,7 +12,7 @@ private:
 public:
   DataBus();
   ~DataBus();
-  void push(BusMessage& busMessage);
+  void publish(BusMessage& busMessage);
   Collection<BusMessage>::Enumerator getEnumerator();
   void clear();
   bool isAny();
