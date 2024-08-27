@@ -94,3 +94,24 @@ test(collection_whenClearedThenSizeZero_enumerator_getNextIsFalse) {
   assertEqual(0, size);
   assertEqual(true, isEmpty);
 }
+
+struct SamplePayload {
+  int id;
+};
+
+test(collection_withStruct_shouldWork) {
+  // Arrange
+  Collection<SamplePayload> payloads;
+
+  // Act
+  SamplePayload payload;
+  payload.id = 1;
+  payloads.push(payload);
+
+  // Assert
+  Collection<SamplePayload>::Enumerator enumerator = payloads.getEnumerator();
+  enumerator.getNext();
+  SamplePayload storedPayload = enumerator.getCurrent();
+  int storedId = storedPayload.id;
+  assertEqual(1, storedId);
+}
