@@ -1,51 +1,21 @@
-#ifndef dataBus.h
-#define dataBus.h
+#ifndef DATABUS_H
+#define DATABUS_H
 
-enum BusMessageType {
-  MSG_EMPTY_MESSAGE = 0,
-  MSG_CONFIG_MODE_CHANGED = 1,
-  MSG_BUTTON_STATE_CHANGED = 2,
-  MSG_POTENTIOMETER_STATE_CHANGED = 3
-};
+#include "../domain.h";
+#include "../enumerable/enumerable.h";
 
-struct ButtonStateChangedPayload {
-  unsigned short id;
-  bool newState;
-};
-
-struct PotentiometerStateChangedPayload {
-  unsigned short id;
-  unsigned short newState;
-};
-
-struct ConfigModeChangedPayload {
-  bool isActive;
-};
-
-union Payload {
-  ButtonStateChangedPayload buttonStateChangePayload;
-  PotentiometerStateChangedPayload potentiometerStateChangedPayload;
-  ConfigModeChangedPayload configModeChangedPayload;
-};
-
-struct BusMessage {
-  BusMessageType type;
-  Payload payload;
-};
-
-struct QueuedBusMessage {
-  BusMessage busMessage;
-  BusMessage* next;
-};
 
 class DataBus {
-  private:
-    QueuedBusMessage* _first;
-  
-  public:
-    DataBus();
-    void push(BusMessage* busMessage);
-    QueuedBusMessage getFirst();
+private:
+  Collection<BusMessage>* _messages;
+
+public:
+  DataBus();
+  // ~DataBus();
+  // void push(BusMessage& busMessage);
+  // // Collection<BusMessage>::Enumerator getEnumerator();
+  // void clear();
+  // bool isAny();
 };
 
 #endif

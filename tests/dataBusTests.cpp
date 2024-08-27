@@ -1,25 +1,16 @@
-#ifndef queueTests.cpp
-#define queueTests.cpp
-
 #include <AUnit.h>
 
 #include "../src/dataBus/dataBus.h"
+#include "../src/domain.h"
 
 
-test(dupa) {
-  
+test(dataBus_isAny_shouldBeFalse) {
+  // Arrange
+  DataBus dataBus;
+
+  // Act
+  // bool result = dataBus.isAny();
+
+  // Assert
+  // assertEqual(false, result);
 }
-
-// test(bar) {
-//   // Arrange
-//   Queue q;
-
-//   // Act
-//   int result = q.getOne();
-
-//   // Assert
-//   assertEqual(result, 0);
-// }
-
-
-#endif
