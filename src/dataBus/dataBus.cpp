@@ -14,9 +14,9 @@ void DataBus::push(BusMessage& busMessage) {
   _messages->push(busMessage);
 }
 
-// // Collection<BusMessage>::Enumerator DataBus::getEnumerator() {
-//   // return _messages.getEnumerator();
-// // }
+Collection<BusMessage>::Enumerator DataBus::getEnumerator() {
+  return _messages->getEnumerator();
+}
 
 void DataBus::clear() {
   _messages->clear();

@@ -13,7 +13,7 @@ public:
   DataBus();
   ~DataBus();
   void push(BusMessage& busMessage);
-  // Collection<BusMessage>::Enumerator getEnumerator();
+  Collection<BusMessage>::Enumerator getEnumerator();
   void clear();
   bool isAny();
 };
