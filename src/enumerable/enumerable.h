@@ -1,5 +1,5 @@
-#ifndef enumerable.h
-#define enumerable .h
+#ifndef ENUMERABLE_H
+#define ENUMERABLE_H
 
 template<typename T>
 class Collection {
