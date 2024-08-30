@@ -62,3 +62,33 @@
 //   // }
 // }
 
+#include "./src/domain.h"
+#include "./src/dataBus/dataBus.h"
+#include "./src/subscriber/subscriber.h"
+#include "./src/throttleButton/throttleButton.h"
+
+DataBus* bus;
+Subscriber* subscriber;
+ThrottleButton* btn;
+
+void setup() {
+  Serial.begin(9600);
+  while (!Serial)
+    ;
+
+  bus = new DataBus();
+  subscriber = new Subscriber(*bus);
+  btn = new ThrottleButton(*bus, 2, 2);
+
+  Serial.println("Initializing..");
+
+  btn->init();
+
+  Serial.println("Initialized!");
+}
+
+void loop() {
+  // btn->act();
+  // subscriber->act();
+  // bus->clear();
+}

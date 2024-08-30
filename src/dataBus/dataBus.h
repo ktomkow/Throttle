@@ -1,6 +1,8 @@
 #ifndef DATABUS_H
 #define DATABUS_H
 
+#include "Arduino.h"
+
 #include "../domain.h";
 #include "../enumerable/enumerable.h";
 
@@ -16,6 +18,7 @@ public:
   Collection<BusMessage>::Enumerator getEnumerator();
   void clear();
   bool isAny();
+  void hello(short);
 };
 
 #endif
