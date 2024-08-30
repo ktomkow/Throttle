@@ -25,3 +25,9 @@ void DataBus::clear() {
 bool DataBus::isAny() {
   return _messages->getSize() > 0;
 }
+
+
+void DataBus::hello(short id) {
+  Serial.print(id);
+  Serial.println(" Says 'hello'");
+}

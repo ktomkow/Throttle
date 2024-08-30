@@ -1,6 +1,8 @@
 #ifndef SUBSCRIBER_H
 #define SUBSCRIBER_H
 
+#include "Arduino.h"
+
 #include "../domain.h"
 #include "../dataBus/dataBus.h"
 
@@ -10,7 +12,8 @@ class Subscriber {
 
   public:
     Subscriber(DataBus& bus);
-    void clear();
+    void act();
 };
+
 
 #endif
