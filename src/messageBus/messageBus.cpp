@@ -56,19 +56,8 @@ void MessageBus::extend() {
 }
 
 void MessageBus::printStats() {
-
   Serial.print("Current messageBus size: ");
   Serial.println(_size);
   Serial.print("Current messageBus capacity: ");
   Serial.println(_capacity);
-}
-
-void MessageBus::printContent() {
-  for (unsigned short i = 0; i < _size; i++) {
-    Serial.print("Message ");
-    Serial.print(i);
-    Serial.println(":");
-    printBusMessage(_messages[i]);
-    Serial.println("-----------------------");
-  }
 }
