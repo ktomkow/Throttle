@@ -5,6 +5,7 @@
 
 #include "../domain.h"
 #include "../dataBus/dataBus.h"
+// #include "../printer/printer.h"
 
 class Subscriber {
   private:

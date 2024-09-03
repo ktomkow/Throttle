@@ -1,9 +1,17 @@
 #include "./dataBus.h"
 
-
+#include "Arduino.h"
 
 DataBus::DataBus() {
+  Serial.println("DataBus initialization begins");
   _messages = new Collection<BusMessage>();
+
+  // BusMessage message3;
+  // message3.type = MSG_CONFIG_MODE_CHANGED;
+  // message3.payload.configModeChangedPayload.isActive = true;
+  // _messages->push(message3);
+
+  Serial.println("DataBus initialized");
 }
 
 DataBus::~DataBus() {
@@ -23,6 +31,12 @@ void DataBus::clear() {
 }
 
 bool DataBus::isAny() {
+  Serial.print("Data bus collection size: ");
+  delay(10);
+  int size = _messages->getSize();
+  delay(10);
+  Serial.println(size);
+  delay(10);
   return _messages->getSize() > 0;
 }
 
