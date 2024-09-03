@@ -2,9 +2,11 @@
 #include "./src/printer/printer.h"
 #include "./src/heartbeat/heartbeat.h"
 #include "./src/messageBus/messageBus.h"
+#include "./src/subscriber/subscriber.h"
 
 Heartbeat* heartbeat;
 MessageBus* messageBus;
+Subscriber* subscriber;
 
 void setup() {
   Serial.begin(9600);
@@ -16,7 +18,8 @@ void setup() {
   heartbeat = new Heartbeat();
 
   messageBus = new MessageBus();
-  messageBus->printStats();
+  subscriber = new Subscriber(messageBus);
+  // messageBus->printStats();
 
   // Przykładowe wiadomości
   BusMessage message1;
@@ -38,25 +41,30 @@ void setup() {
 
   Serial.println("End of printContent");
 
-  Serial.println("Now go through");
+  // Serial.println("Now go through");
 
-  for (unsigned short i = 0; i < messageBus->getSize(); ++i) {
-    Serial.print("Accessing element ");
-    Serial.print(i);
-    Serial.println(" via operator[]:");
-    printBusMessage((*messageBus)[i]);  // Wywołanie funkcji printBusMessage
-    Serial.println("-----------------------");
-  }
+  // for (unsigned short i = 0; i < messageBus->getSize(); ++i) {
+  //   Serial.print("Accessing element ");
+  //   Serial.print(i);
+  //   Serial.println(" via operator[]:");
+  //   printBusMessage((*messageBus)[i]);  // Wywołanie funkcji printBusMessage
+  //   Serial.println("-----------------------");
+  // }
 
 
-  Serial.println("End of go through");
+  // Serial.println("End of go through");
 
-  messageBus->clear();
-
+  Serial.println();
+  Serial.println("==========================");
+  Serial.println("***** END  OF  SETUP *****");
+  Serial.println("==========================");
+  Serial.println();
   Serial.flush();
 }
 
 void loop() {
   heartbeat->act();
+  subscriber->act();
+  messageBus->clear();
   delay(10);
 }

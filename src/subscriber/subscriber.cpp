@@ -1,6 +1,6 @@
 #include "./subscriber.h"
 
-Subscriber::Subscriber(DataBus& bus) {
+Subscriber::Subscriber(const MessageBus* bus) {
   Serial.println("Subscriber initialization begins");
   _bus = bus;
 
@@ -8,17 +8,7 @@ Subscriber::Subscriber(DataBus& bus) {
 }
 
 void Subscriber::act() {
-  Serial.println("Subscriber act called");
-  Serial.println(_bus.isAny());
-  if (_bus.isAny() == true) {
-    Serial.println("Bus not empty");
-  } else {
-    Serial.println("Bus empty");
+  for (unsigned short i = 0; i < _bus->getSize(); ++i) {
+    printBusMessage((*_bus)[i]);
   }
-
-
-  // Collection<BusMessage>::Enumerator enumerator = _bus.getEnumerator();
-  // while (enumerator.getNext()) {
-  //   printBusMessage(enumerator.getCurrent());
-  // }
 }
