@@ -1,25 +1,24 @@
 #include "./subscriber.h"
 
 Subscriber::Subscriber(DataBus& bus) {
+  Serial.println("Subscriber initialization begins");
   _bus = bus;
+
+  Serial.println("Subscriber initialized");
 }
 
 void Subscriber::act() {
-  Collection<BusMessage>::Enumerator enumerator = _bus.getEnumerator();
-  while (enumerator.getNext()) {
-    Serial.println("Found one!");
-    BusMessage message = enumerator.getCurrent();
-    switch (message.type) {
-      case MSG_BUTTON_STATE_CHANGED:
-        ButtonStateChangedPayload payload = message.payload.buttonStateChangePayload;
-        Serial.println("Handling MSG_BUTTON_STATE_CHANGED");
-        Serial.print(" : ");
-        Serial.println(payload.state);
-        return;
-      default:
-        Serial.print("Unknown/not implemented message type ");
-        Serial.println(message.type);
-        return;
-    }
+  Serial.println("Subscriber act called");
+  Serial.println(_bus.isAny());
+  if (_bus.isAny() == true) {
+    Serial.println("Bus not empty");
+  } else {
+    Serial.println("Bus empty");
   }
+
+
+  // Collection<BusMessage>::Enumerator enumerator = _bus.getEnumerator();
+  // while (enumerator.getNext()) {
+  //   printBusMessage(enumerator.getCurrent());
+  // }
 }

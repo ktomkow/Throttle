@@ -1,6 +1,8 @@
 #ifndef ENUMERABLE_H
 #define ENUMERABLE_H
 
+#include "Arduino.h"
+
 template<typename T>
 class Collection {
 private:
@@ -34,9 +36,12 @@ public:
 
 template<typename T>
 Collection<T>::Collection() {
+  Serial.println("Collection initialization begins");
   _capacity = 4;
   _size = 0;
   _collection = new T[_capacity];
+
+  Serial.println("Collection initialized");
 }
 
 template<typename T>
