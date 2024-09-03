@@ -33,9 +33,24 @@ void setup() {
   messageBus->publish(message1);
   messageBus->publish(message2);
   messageBus->printStats();
+  Serial.println("Now printContent");
   messageBus->printContent();
 
-  
+  Serial.println("End of printContent");
+
+  Serial.println("Now go through");
+
+  for (unsigned short i = 0; i < messageBus->getSize(); ++i) {
+    Serial.print("Accessing element ");
+    Serial.print(i);
+    Serial.println(" via operator[]:");
+    printBusMessage((*messageBus)[i]);  // Wywołanie funkcji printBusMessage
+    Serial.println("-----------------------");
+  }
+
+
+  Serial.println("End of go through");
+
   messageBus->clear();
 
   Serial.flush();

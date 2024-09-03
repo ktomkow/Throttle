@@ -23,6 +23,10 @@ void MessageBus::publish(const BusMessage& busMessage) {
   _messages[_size++] = busMessage;
 }
 
+BusMessage& MessageBus::operator[](unsigned short index) const {
+  return _messages[index];
+}
+
 void MessageBus::clear() {
   delete[] _messages;
   _messages = nullptr;
@@ -33,6 +37,10 @@ void MessageBus::clear() {
 
 bool MessageBus::isAny() {
   return _size > 0;
+}
+
+unsigned short MessageBus::getSize() {
+  return _size;
 }
 
 void MessageBus::extend() {
