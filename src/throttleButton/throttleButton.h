@@ -4,12 +4,12 @@
 #include "Arduino.h"
 
 #include "../domain.h"
-#include "../dataBus/dataBus.h"
+#include "../messageBus/messageBus.h"
 
 class ThrottleButton {
 private:
   short _id;
-  DataBus& _bus;
+  MessageBus* _bus;
   const unsigned int _hysteresisMillis = 50;
   InputState _state;
   InputState _lastRead;
@@ -24,7 +24,7 @@ protected:
   void publish();
 
 public:
-  ThrottleButton(DataBus& bus, int pin, short id);
+  ThrottleButton(MessageBus* bus, int pin, short id);
   int getPin();
   void act();
   void init();
