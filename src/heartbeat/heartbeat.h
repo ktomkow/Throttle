@@ -6,9 +6,6 @@
 class Heartbeat {
 private:
   unsigned long _timestamp;
-  bool _isInitialRun;
-  int _led;
-  bool _state;
   const unsigned int _hysteresisMillis = 3000;
 
 public:
