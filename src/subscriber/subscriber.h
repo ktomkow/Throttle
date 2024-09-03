@@ -4,15 +4,15 @@
 #include "Arduino.h"
 
 #include "../domain.h"
-#include "../dataBus/dataBus.h"
-// #include "../printer/printer.h"
+#include "../messageBus/messageBus.h"
+#include "../printer/printer.h"
 
 class Subscriber {
   private:
-    DataBus& _bus;
+    MessageBus* _bus;
 
   public:
-    Subscriber(DataBus& bus);
+    Subscriber(const MessageBus* bus);
     void act();
 };
 
