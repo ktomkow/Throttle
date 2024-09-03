@@ -4,10 +4,14 @@
 #include "Arduino.h"
 
 #include "../domain.h";
+#include "../printer/printer.h";
 
 class MessageBus {
 private:
   BusMessage* _messages;
+  unsigned short _capacity;
+  unsigned short _size;
+  void extend();
 
 public:
   MessageBus();
@@ -16,6 +20,8 @@ public:
   void publish(const BusMessage& busMessage);
   void clear();
   bool isAny();
+  void printStats();
+  void printContent();
 };
 
 #endif
