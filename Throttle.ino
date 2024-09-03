@@ -3,12 +3,12 @@
 #include "./src/heartbeat/heartbeat.h"
 #include "./src/messageBus/messageBus.h"
 #include "./src/subscriber/subscriber.h"
-#include "./src/throttleButton/throttleButton.h"
+#include "./src/button/button.h"
 
 Heartbeat* heartbeat;
 MessageBus* messageBus;
 Subscriber* subscriber;
-ThrottleButton* firstButton;
+Button* firstButton;
 
 void setup() {
   Serial.begin(9600);
@@ -22,7 +22,7 @@ void setup() {
   messageBus = new MessageBus();
   subscriber = new Subscriber(messageBus);
 
-  firstButton = new ThrottleButton(messageBus, 2, 2);
+  firstButton = new Button(messageBus, 2, 2);
 
   messageBus->printStats();
 

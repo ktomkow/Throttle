@@ -1,6 +1,6 @@
-#include "./throttleButton.h"
+#include "./button.h"
 
-ThrottleButton::ThrottleButton(MessageBus* bus, int pin, short id) {
+Button::Button(MessageBus* bus, int pin, short id) {
   _id = id;
   _bus = bus;
   _pin = pin;
@@ -10,15 +10,15 @@ ThrottleButton::ThrottleButton(MessageBus* bus, int pin, short id) {
   _isInitialized = false;
 }
 
-int ThrottleButton::getPin() {
+int Button::getPin() {
   return _pin;
 }
 
-InputState ThrottleButton::getState() {
+InputState Button::getState() {
   return _state;
 }
 
-void ThrottleButton::init() {
+void Button::init() {
   Serial.print("Initializing button Id: ");
   Serial.print(_id);
   Serial.print(" On PIN: ");
@@ -45,7 +45,7 @@ void ThrottleButton::init() {
   }
 }
 
-void ThrottleButton::act() {
+void Button::act() {
   if (_isInitialized == false) {
     return;
   }
@@ -70,17 +70,17 @@ void ThrottleButton::act() {
   _lastRead = currentRead;
 }
 
-void ThrottleButton::onActiveStateEntered() {
+void Button::onActiveStateEntered() {
   _state = ACTIVE_INPUT_STATE;
   publish();
 }
 
-void ThrottleButton::onInactiveStateEntered() {
+void Button::onInactiveStateEntered() {
   _state = INACTIVE_INPUT_STATE;
   publish();
 }
 
-BusMessage ThrottleButton::createPayload() {
+BusMessage Button::createPayload() {
   BusMessage message;
   message.type = MSG_BUTTON_STATE_CHANGED;
   message.payload.buttonStateChangePayload.id = _id;
@@ -89,7 +89,7 @@ BusMessage ThrottleButton::createPayload() {
   return message;
 }
 
-void ThrottleButton::publish() {
+void Button::publish() {
   BusMessage busMessage = createPayload();
   _bus->publish(busMessage);
 }

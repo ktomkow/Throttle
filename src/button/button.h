@@ -1,12 +1,12 @@
-#ifndef THROTTLEBUTTON_H
-#define THROTTLEBUTTON_H
+#ifndef BUTTON_H
+#define BUTTON_H
 
 #include "Arduino.h"
 
 #include "../domain.h"
 #include "../messageBus/messageBus.h"
 
-class ThrottleButton {
+class Button {
 private:
   short _id;
   MessageBus* _bus;
@@ -24,7 +24,7 @@ protected:
   void publish();
 
 public:
-  ThrottleButton(MessageBus* bus, int pin, short id);
+  Button(MessageBus* bus, int pin, short id);
   int getPin();
   void act();
   void init();
