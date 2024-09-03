@@ -16,7 +16,7 @@ public:
 };
 
 Heartbeat::Heartbeat(Picker& picker) {
-  Serial.println("Heartbeat initialization")
+  Serial.println("Heartbeat initialization");
   _timestamp = millis();
   _picker = picker;
   _led = 10;
