@@ -1,10 +1,10 @@
 #include "heartbeat.h";
 
 Heartbeat::Heartbeat() {
-  Serial.println("Heartbeat initialization");
+  Serial.println("Heartbeat initialization STARTED");
   _timestamp = millis();
 
-  Serial.println("Heartbeat is initialized");
+  Serial.println("Heartbeat initialization FINISHED");
 }
 
 void Heartbeat::act() {

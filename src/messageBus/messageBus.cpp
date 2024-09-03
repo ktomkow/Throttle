@@ -2,13 +2,13 @@
 #include "messageBus.h"
 
 MessageBus::MessageBus() {
-  Serial.println("MessageBus initialization");
+  Serial.println("MessageBus initialization STARTED");
 
   _size = 0;
   _capacity = 4;
   _messages = new BusMessage[_capacity];
 
-  Serial.println("MessageBus is initialized");
+  Serial.println("MessageBus initialization FINISHED");
 }
 
 MessageBus::~MessageBus() {

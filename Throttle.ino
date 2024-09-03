@@ -3,10 +3,12 @@
 #include "./src/heartbeat/heartbeat.h"
 #include "./src/messageBus/messageBus.h"
 #include "./src/subscriber/subscriber.h"
+#include "./src/throttleButton/throttleButton.h"
 
 Heartbeat* heartbeat;
 MessageBus* messageBus;
 Subscriber* subscriber;
+ThrottleButton* firstButton;
 
 void setup() {
   Serial.begin(9600);
@@ -19,36 +21,12 @@ void setup() {
 
   messageBus = new MessageBus();
   subscriber = new Subscriber(messageBus);
-  // messageBus->printStats();
 
-  // Przykładowe wiadomości
-  BusMessage message1;
-  message1.type = MSG_BUTTON_STATE_CHANGED;
-  message1.payload.buttonStateChangePayload.id = 1;
-  message1.payload.buttonStateChangePayload.state = ACTIVE_INPUT_STATE;
+  firstButton = new ThrottleButton(messageBus, 2, 2);
 
-  BusMessage message2;
-  message2.type = MSG_POTENTIOMETER_STATE_CHANGED;
-  message2.payload.potentiometerStateChangedPayload.id = 2;
-  message2.payload.potentiometerStateChangedPayload.state = 512;
-
-  // Dodanie wiadomości do tablicy
-  messageBus->publish(message1);
-  messageBus->publish(message2);
   messageBus->printStats();
 
-  // Serial.println("Now go through");
-
-  // for (unsigned short i = 0; i < messageBus->getSize(); ++i) {
-  //   Serial.print("Accessing element ");
-  //   Serial.print(i);
-  //   Serial.println(" via operator[]:");
-  //   printBusMessage((*messageBus)[i]);  // Wywołanie funkcji printBusMessage
-  //   Serial.println("-----------------------");
-  // }
-
-
-  // Serial.println("End of go through");
+  firstButton->init();
 
   Serial.println();
   Serial.println("==========================");
@@ -60,6 +38,7 @@ void setup() {
 
 void loop() {
   heartbeat->act();
+  firstButton->act();
   subscriber->act();
   messageBus->clear();
   delay(10);

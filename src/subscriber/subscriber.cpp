@@ -1,10 +1,10 @@
 #include "./subscriber.h"
 
 Subscriber::Subscriber(const MessageBus* bus) {
-  Serial.println("Subscriber initialization begins");
+  Serial.println("Subscriber initialization STARTED");
   _bus = bus;
 
-  Serial.println("Subscriber initialized");
+  Serial.println("Subscriber initialization FINISHED");
 }
 
 void Subscriber::act() {
