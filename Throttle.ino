@@ -36,10 +36,6 @@ void setup() {
   messageBus->publish(message1);
   messageBus->publish(message2);
   messageBus->printStats();
-  Serial.println("Now printContent");
-  messageBus->printContent();
-
-  Serial.println("End of printContent");
 
   // Serial.println("Now go through");
 

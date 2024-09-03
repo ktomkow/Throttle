@@ -21,7 +21,6 @@ public:
   void clear();
   bool isAny();
   void printStats();
-  void printContent();
   unsigned short getSize();
   BusMessage& operator[](unsigned short index) const;
 };
