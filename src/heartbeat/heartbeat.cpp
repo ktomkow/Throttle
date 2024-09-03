@@ -1,24 +1,8 @@
-#ifndef HEARTBEAT_H
-#define HEARTBEAT_H
+#include "heartbeat.h";
 
-#include "Arduino.h"
-
-class Heartbeat {
-private:
-  unsigned long _timestamp;
-  int _led;
-  bool _state;
-  const unsigned int _hysteresisMillis = 1000;
-
-public:
-  void act();
-  Heartbeat();
-};
-
-Heartbeat::Heartbeat(Picker& picker) {
+Heartbeat::Heartbeat() {
   Serial.println("Heartbeat initialization");
   _timestamp = millis();
-  _picker = picker;
   _led = 10;
   _state = false;
 
@@ -36,8 +20,6 @@ void Heartbeat::act() {
     digitalWrite(_led, _state == true ? LOW : HIGH);
     _state = !_state;
     Serial.print("Heartbeat ");
-    Serial.println(_picker.take(), BIN);
+    Serial.println(now, BIN);
   }
 }
-
-#endif
