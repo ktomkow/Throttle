@@ -17,6 +17,7 @@ private:
   unsigned short _minPhysicalRead = 200;
   unsigned short _borderline = 500;
   unsigned short _maxPhysicalRead = 900;
+  unsigned short _borderOffset = 5;
   unsigned short _minLogicRead = 0;
   unsigned short _maxLogicRead = 255;
   unsigned short recalculateLogicalState();

@@ -107,8 +107,8 @@ void Lever::reportLogicalState() {
 void Lever::calibrate() {
   unsigned short currentValue = makeRead();
   if (currentValue > _borderline) {
-    _maxPhysicalRead = currentValue;
+    _maxPhysicalRead = currentValue - _borderOffset;
   } else {
-    _minPhysicalRead = currentValue;
+    _minPhysicalRead = currentValue + _borderOffset;
   }
 }
