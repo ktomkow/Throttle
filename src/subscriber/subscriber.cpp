@@ -1,11 +1,11 @@
 #include "./subscriber.h"
 
 Subscriber::Subscriber() {
-  _id = ++subscriberCounter;
+  _subscriberId = ++subscriberCounter;
 }
 
-unsigned short Subscriber::getId() {
-  return _id;
+unsigned short Subscriber::getSubscriberId() {
+  return _subscriberId;
 }
 
 void Subscriber::handle(const Message& message) {
