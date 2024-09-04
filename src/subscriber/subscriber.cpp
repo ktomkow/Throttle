@@ -1,5 +1,13 @@
 #include "./subscriber.h"
 
+Subscriber::Subscriber() {
+  _id = ++subscriberCounter;
+}
+
+unsigned short Subscriber::getId() {
+  return _id;
+}
+
 void Subscriber::handle(const Message& message) {
   switch (message.type) {
     case MSG_BUTTON_STATE_CHANGED:

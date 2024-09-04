@@ -4,11 +4,14 @@
 #include "./src/messageBus/messageBus.h"
 #include "./src/debugSubscriber/debugSubscriber.h"
 #include "./src/button/button.h"
+#include "./src/subscriber/subscriber.h"
+#include "./src/mediator/mediator.h"
 
 Heartbeat* heartbeat;
 MessageBus* messageBus;
 DebugSubscriber* subscriber;
 Button* firstButton;
+Mediator* mediator;
 
 void setup() {
   Serial.begin(9600);
@@ -34,6 +37,25 @@ void setup() {
   Serial.println("==========================");
   Serial.println();
   Serial.flush();
+
+  Subscriber* sub1 = new Subscriber();
+  Subscriber* sub2 = new Subscriber();
+  Subscriber* sub3 = new Subscriber();
+
+  Serial.print("Sub 1 id: ");
+  Serial.println(sub1->getId());
+  Serial.print("Sub 2 id: ");
+  Serial.println(sub2->getId());
+  Serial.print("Sub 3 id: ");
+  Serial.println(sub3->getId());
+
+  mediator = new Mediator();
+  mediator->subscribe(sub1);
+  mediator->subscribe(sub2);
+  mediator->subscribe(sub3);
+  mediator->printSubscribers();
+
+  delay(10000);
 }
 
 void loop() {
