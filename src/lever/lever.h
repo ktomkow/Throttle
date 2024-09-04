@@ -17,6 +17,7 @@ private:
   unsigned short _maxRead = 1023;
 
 protected:
+  virtual void handle(const ButtonStateChangedPayload&) override;
 
 public:
   Lever(unsigned short id, int pin, const Mediator* mediator);
