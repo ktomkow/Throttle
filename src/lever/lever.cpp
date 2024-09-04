@@ -80,8 +80,8 @@ void Lever::handle(const ButtonStateChangedPayload& payload) {
 
 unsigned short Lever::recalculateLogicalState() {
   short valueToMap = _physicalState;
-  if (valueToMap > _physicalState) {
-    valueToMap = _physicalState;
+  if (valueToMap > _maxPhysicalRead) {
+    valueToMap = _maxPhysicalRead;
   }
 
   if (valueToMap < _minPhysicalRead) {
