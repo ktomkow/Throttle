@@ -1,12 +1,14 @@
 #include "./mediator.h"
 
 Mediator::Mediator() {
+  Serial.println("Mediator initialization STARTED");
   _firstSubscriber = nullptr;
+  Serial.println("Mediator initialization FINISHED");
 }
 
 void Mediator::subscribe(const Subscriber* subscriber) {
   Serial.print("Registering subscriber ");
-  Serial.println(subscriber->getId());
+  Serial.println(subscriber->getSubscriberId());
 
   if (_firstSubscriber == nullptr) {
     _firstSubscriber = new SubscriberItem();
@@ -46,7 +48,7 @@ void Mediator::printSubscribers() {
   Serial.println("List of subscribers:");
   SubscriberItem* current = _firstSubscriber;
   while (current != nullptr) {
-    Serial.println(current->subscriber->getId());
+    Serial.println(current->subscriber->getSubscriberId());
     current = current->next;
   }
 }
