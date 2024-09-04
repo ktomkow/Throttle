@@ -43,11 +43,11 @@ void setup() {
   Subscriber* sub3 = new Subscriber();
 
   Serial.print("Sub 1 id: ");
-  Serial.println(sub1->getId());
+  Serial.println(sub1->getSubscriberId());
   Serial.print("Sub 2 id: ");
-  Serial.println(sub2->getId());
+  Serial.println(sub2->getSubscriberId());
   Serial.print("Sub 3 id: ");
-  Serial.println(sub3->getId());
+  Serial.println(sub3->getSubscriberId());
 
   mediator = new Mediator();
   mediator->subscribe(sub1);
