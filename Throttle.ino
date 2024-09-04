@@ -1,16 +1,16 @@
 #include "./src/domain.h"
 #include "./src/printer/printer.h"
 #include "./src/heartbeat/heartbeat.h"
-#include "./src/messageBus/messageBus.h"
+// #include "./src/messageBus/messageBus.h"
 #include "./src/debugSubscriber/debugSubscriber.h"
 #include "./src/button/button.h"
-#include "./src/subscriber/subscriber.h"
+// #include "./src/subscriber/subscriber.h"
 #include "./src/mediator/mediator.h"
 #include "./src/lever/lever.h"
 
 Heartbeat* heartbeat;
-MessageBus* messageBus;
-DebugSubscriber* subscriber;
+// MessageBus* messageBus;
+// DebugSubscriber* subscriber;
 Button* firstButton;
 Mediator* mediator;
 Lever* lever;
@@ -25,23 +25,22 @@ void setup() {
   heartbeat = new Heartbeat();
 
   mediator = new Mediator();
-  messageBus = new MessageBus();
-  subscriber = new DebugSubscriber(messageBus);
+  // messageBus = new MessageBus();
+  // subscriber = new DebugSubscriber(messageBus);
 
-  firstButton = new Button(messageBus, 2, 2);
-
-  messageBus->printStats();
-
-  firstButton->init();
+  firstButton = new Button(2, 2, mediator);
 
   lever = new Lever(38, A0, mediator);
+
+  mediator->subscribe(lever);
+  mediator->subscribe(firstButton);
+
+  firstButton->init();
   lever->init();
   lever->printState();
 
-  mediator->subscribe(lever);
-
   Serial.flush();
- 
+
   Serial.println();
   Serial.println("==========================");
   Serial.println("***** END  OF  SETUP *****");
@@ -55,7 +54,5 @@ void setup() {
 void loop() {
   heartbeat->act();
   firstButton->act();
-  subscriber->act();
-  messageBus->clear();
-  delay(10);
+  lever->act();
 }

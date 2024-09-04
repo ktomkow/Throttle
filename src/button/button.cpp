@@ -1,13 +1,21 @@
 #include "./button.h"
 
-Button::Button(MessageBus* bus, int pin, short id) {
+Button::Button(unsigned short id, int pin, const Mediator* mediator)
+  : Publisher(mediator) {
+  Serial.print("Button ");
+  Serial.print(id);
+  Serial.println(" constructor STARTED");
+
   _id = id;
-  _bus = bus;
   _pin = pin;
   _state = UNDEFINED_INPUT_STATE;
   _lastRead = UNDEFINED_INPUT_STATE;
   _readSinceTimestamp = 0;
   _isInitialized = false;
+
+  Serial.print("Button ");
+  Serial.print(id);
+  Serial.println(" constructor FINISHED");
 }
 
 int Button::getPin() {
@@ -19,11 +27,12 @@ InputState Button::getState() {
 }
 
 void Button::init() {
-  Serial.print("Initializing button Id: ");
+  Serial.println("***********************");
+  Serial.print("Button: ");
   Serial.print(_id);
-  Serial.print(" On PIN: ");
-  Serial.println(_pin);
-
+  Serial.print(" on PIN: ");
+  Serial.print(_pin);
+  Serial.println(" initialization STARTED");
 
   pinMode(_pin, INPUT);
 
@@ -31,18 +40,21 @@ void Button::init() {
 
   _isInitialized = true;
 
-
   _lastRead = digitalRead(_pin) == 0 ? ACTIVE_INPUT_STATE : INACTIVE_INPUT_STATE;
   _state = _lastRead;
-
-  Serial.print("Initialized button on PIN: ");
-  Serial.println(_pin);
 
   if (_lastRead == ACTIVE_INPUT_STATE) {
     onActiveStateEntered();
   } else {
     onInactiveStateEntered();
   }
+
+  Serial.print("Button: ");
+  Serial.print(_id);
+  Serial.print(" on PIN: ");
+  Serial.print(_pin);
+  Serial.println(" initialization FINISHED");
+  Serial.println("***********************");
 }
 
 void Button::act() {
@@ -91,5 +103,5 @@ Message Button::createPayload() {
 
 void Button::publish() {
   Message message = createPayload();
-  _bus->publish(message);
+  Publisher::publish(message);
 }
