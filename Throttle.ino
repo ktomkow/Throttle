@@ -47,8 +47,6 @@ void setup() {
   Serial.println("==========================");
   Serial.println();
   Serial.flush();
-
-  delay(10000);
 }
 
 void loop() {
