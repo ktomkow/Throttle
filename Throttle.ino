@@ -38,8 +38,10 @@ void setup() {
   lever->init();
   lever->printState();
 
-  Serial.flush();
+  mediator->subscribe(lever);
 
+  Serial.flush();
+ 
   Serial.println();
   Serial.println("==========================");
   Serial.println("***** END  OF  SETUP *****");
