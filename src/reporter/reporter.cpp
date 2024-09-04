@@ -10,7 +10,7 @@ void Reporter::init() {
 }
 
 void Reporter::handle(const ButtonStateChangedPayload& payload) {
-  if(_isInitialized != true) {
+  if (_isInitialized != true) {
     return;
   }
 
@@ -20,4 +20,12 @@ void Reporter::handle(const ButtonStateChangedPayload& payload) {
   } else {
     _joystick->releaseButton(buttonId);
   }
+}
+
+void Reporter::handle(const PotentiometerStateChangedPayload& payload) {
+  if (_isInitialized != true) {
+    return;
+  }
+
+  _joystick->setXAxis(payload.state);
 }

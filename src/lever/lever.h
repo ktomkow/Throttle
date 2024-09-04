@@ -13,8 +13,13 @@ private:
   unsigned short _id;
   int _pin;
   unsigned short _physicalState = 0;
+  unsigned short _logicState = 0;
   unsigned short _minRead = 0;
   unsigned short _maxRead = 1023;
+  unsigned short _minLogical = 0;
+  unsigned short _maxLogical = 255;
+  unsigned short recalculateLogicalState();
+  void reportLogicalState();
 
 protected:
   virtual void handle(const ButtonStateChangedPayload&) override;

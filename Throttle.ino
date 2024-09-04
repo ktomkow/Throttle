@@ -25,6 +25,11 @@ void setup() {
 
   heartbeat = new Heartbeat();
 
+  Serial.println("Joystick initialization STARTED");
+  Joystick.begin(false);
+  Joystick.setXAxisRange(0, 255);
+  Serial.println("Joystick initialization FINISHED");
+
   mediator = new Mediator();
 
   firstButton = new Button(2, 2, mediator);
@@ -41,9 +46,7 @@ void setup() {
   lever->init();
   lever->printState();
 
-  Joystick.begin(false);
-  Joystick.setXAxisRange(0, 255);
-  Joystick.setXAxis(98);
+
 
   reporter->init();
 

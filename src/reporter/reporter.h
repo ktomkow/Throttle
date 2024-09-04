@@ -16,6 +16,7 @@ private:
 
 protected:
   virtual void handle(const ButtonStateChangedPayload&) override;
+  virtual void handle(const PotentiometerStateChangedPayload&) override;
 
 public:
   Reporter(Joystick_*);
