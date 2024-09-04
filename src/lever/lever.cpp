@@ -54,9 +54,15 @@ void Lever::init() {
 }
 
 void Lever::act() {
-  if(_isInitialized != true) {
+  if (_isInitialized != true) {
     return;
   }
 
   _state = analogRead(_pin);
+}
+
+void Lever::handle(const ButtonStateChangedPayload& payload) {
+  if (payload.state == ACTIVE_INPUT_STATE) {
+    printState();
+  }
 }
