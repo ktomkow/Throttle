@@ -22,7 +22,7 @@ struct ButtonStateChangedPayload {
 
 struct PotentiometerStateChangedPayload {
   short id;
-  int state;
+  unsigned short state;
 };
 
 struct ConfigModeChangedPayload {

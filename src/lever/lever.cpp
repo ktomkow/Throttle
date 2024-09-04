@@ -44,6 +44,8 @@ void Lever::init() {
 
   _isInitialized = true;
   _physicalState = analogRead(_pin);
+  _logicState = recalculateLogicalState();
+  reportLogicalState();
 
   Serial.print("Lever: ");
   Serial.print(_id);
@@ -59,10 +61,32 @@ void Lever::act() {
   }
 
   _physicalState = analogRead(_pin);
+  unsigned short logicState = recalculateLogicalState();
+
+  // do not report if nothing changed
+  if (logicState == _logicState) {
+    return;
+  }
+
+  _logicState = logicState;
+  reportLogicalState();
 }
 
 void Lever::handle(const ButtonStateChangedPayload& payload) {
-  if (payload.state == ACTIVE_INPUT_STATE) {
-    printState();
-  }
+  // if (payload.state == ACTIVE_INPUT_STATE) {
+  //   printState();
+  // }
+}
+
+unsigned short Lever::recalculateLogicalState() {
+  return map(_physicalState, _minRead, _maxRead, _minLogical, _maxLogical);
+}
+
+void Lever::reportLogicalState() {
+  Message message;
+  message.type = MSG_POTENTIOMETER_STATE_CHANGED;
+  message.payload.potentiometerStateChangedPayload.id = _id;
+  message.payload.potentiometerStateChangedPayload.state = _logicState;
+
+  Publisher::publish(message);
 }
