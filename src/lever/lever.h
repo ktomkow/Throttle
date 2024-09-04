@@ -14,12 +14,15 @@ private:
   int _pin;
   unsigned short _physicalState = 0;
   unsigned short _logicState = 0;
-  unsigned short _minRead = 0;
-  unsigned short _maxRead = 1023;
-  unsigned short _minLogical = 0;
-  unsigned short _maxLogical = 255;
+  unsigned short _minPhysicalRead = 200;
+  unsigned short _borderline = 500;
+  unsigned short _maxPhysicalRead = 900;
+  unsigned short _minLogicRead = 0;
+  unsigned short _maxLogicRead = 255;
   unsigned short recalculateLogicalState();
   void reportLogicalState();
+  unsigned short makeRead();
+  void calibrate();
 
 protected:
   virtual void handle(const ButtonStateChangedPayload&) override;

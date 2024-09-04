@@ -27,10 +27,10 @@ void Lever::printState() {
   Serial.print("Physical State: ");
   Serial.println(_physicalState);
 
-  Serial.print("Min read: ");
-  Serial.print(_minRead);
-  Serial.print(" Max read: ");
-  Serial.println(_maxRead);
+  Serial.print("Min physical read: ");
+  Serial.print(_minPhysicalRead);
+  Serial.print(" Max physical read: ");
+  Serial.println(_maxPhysicalRead);
   Serial.println("***********************");
 }
 
@@ -43,7 +43,7 @@ void Lever::init() {
   Serial.println(" initialization STARTED");
 
   _isInitialized = true;
-  _physicalState = analogRead(_pin);
+  _physicalState = makeRead();
   _logicState = recalculateLogicalState();
   reportLogicalState();
 
@@ -60,7 +60,7 @@ void Lever::act() {
     return;
   }
 
-  _physicalState = analogRead(_pin);
+  _physicalState = makeRead();
   unsigned short logicState = recalculateLogicalState();
 
   // do not report if nothing changed
@@ -73,13 +73,26 @@ void Lever::act() {
 }
 
 void Lever::handle(const ButtonStateChangedPayload& payload) {
-  // if (payload.state == ACTIVE_INPUT_STATE) {
-  //   printState();
-  // }
+  if (payload.state == ACTIVE_INPUT_STATE) {
+    calibrate();
+  }
 }
 
 unsigned short Lever::recalculateLogicalState() {
-  return map(_physicalState, _minRead, _maxRead, _minLogical, _maxLogical);
+  short valueToMap = _physicalState;
+  if (valueToMap > _physicalState) {
+    valueToMap = _physicalState;
+  }
+
+  if (valueToMap < _minPhysicalRead) {
+    valueToMap = _minPhysicalRead;
+  }
+
+  return map(_physicalState, _minPhysicalRead, _maxPhysicalRead, _minLogicRead, _maxLogicRead);
+}
+
+unsigned short Lever::makeRead() {
+  return analogRead(_pin);
 }
 
 void Lever::reportLogicalState() {
@@ -89,4 +102,13 @@ void Lever::reportLogicalState() {
   message.payload.potentiometerStateChangedPayload.state = _logicState;
 
   Publisher::publish(message);
+}
+
+void Lever::calibrate() {
+  unsigned short currentValue = makeRead();
+  if (currentValue > _borderline) {
+    _maxPhysicalRead = currentValue;
+  } else {
+    _minPhysicalRead = currentValue;
+  }
 }
