@@ -1,9 +1,9 @@
 #include "./publisher.h"
 
-Publisher::Publisher(const MessageBus* bus) {
-  _bus = bus;
+Publisher::Publisher(const Mediator* mediator) {
+  _mediator = mediator;
 }
 
 void Publisher::publish(const Message& message) {
-  _bus->publish(message);
+  _mediator->publish(message);
 }
