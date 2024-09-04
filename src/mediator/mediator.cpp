@@ -5,6 +5,9 @@ Mediator::Mediator() {
 }
 
 void Mediator::subscribe(const Subscriber* subscriber) {
+  Serial.print("Registering subscriber ");
+  Serial.println(subscriber->getId());
+
   if (_firstSubscriber == nullptr) {
     _firstSubscriber = new SubscriberItem();
     _firstSubscriber->subscriber = subscriber;
