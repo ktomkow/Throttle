@@ -20,7 +20,7 @@ private:
 protected:
   virtual void onActiveStateEntered();
   virtual void onInactiveStateEntered();
-  BusMessage createPayload();
+  Message createPayload();
   void publish();
 
 public:

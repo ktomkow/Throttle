@@ -2,7 +2,7 @@
 
 #include "../domain.h"
 
-void printBusMessage(const BusMessage& message) {
+void printMessage(const Message& message) {
   Serial.println("----------------------------------");
   Serial.print("Message Type: ");
   switch (message.type) {

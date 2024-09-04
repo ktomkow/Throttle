@@ -9,6 +9,6 @@ Subscriber::Subscriber(const MessageBus* bus) {
 
 void Subscriber::act() {
   for (unsigned short i = 0; i < _bus->getSize(); ++i) {
-    printBusMessage((*_bus)[i]);
+    printMessage((*_bus)[i]);
   }
 }

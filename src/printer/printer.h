@@ -3,6 +3,6 @@
 
 #include "../domain.h"
 
-void printBusMessage(const BusMessage& message);
+void printMessage(const Message& message);
 
 #endif
