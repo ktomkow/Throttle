@@ -4,14 +4,14 @@
 #include "Arduino.h"
 
 #include "../domain.h"
-#include "../messageBus/messageBus.h"
+#include "../mediator/mediator.h"
 
 class Publisher {
   protected:
-    MessageBus* _bus;
+    Mediator* _mediator;
 
   public:
-    Publisher(const MessageBus*);
+    Publisher(const Mediator*);
     virtual void publish(const Message&);
 };
 

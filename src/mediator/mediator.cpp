@@ -25,7 +25,17 @@ void Mediator::subscribe(const Subscriber* subscriber) {
   current->next->next = nullptr;
 }
 
-void Mediator::publish(const Message& message) {}
+void Mediator::publish(const Message& message) {
+  if (_firstSubscriber == nullptr) {
+    return;
+  }
+
+  SubscriberItem* current = _firstSubscriber;
+  while (current != nullptr) {
+    current->subscriber->handle(message);
+    current = current->next;
+  }
+}
 
 void Mediator::printSubscribers() {
   if (_firstSubscriber == nullptr) {
