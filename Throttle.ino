@@ -4,11 +4,17 @@
 #include "./src/button/button.h"
 #include "./src/mediator/mediator.h"
 #include "./src/lever/lever.h"
+#include "./src/reporter/reporter.h"
+
+#include <Joystick.h>
+
+Joystick_ Joystick;
 
 Heartbeat* heartbeat;
 Button* firstButton;
 Mediator* mediator;
 Lever* lever;
+Reporter* reporter;
 
 void setup() {
   Serial.begin(9600);
@@ -25,14 +31,21 @@ void setup() {
 
   lever = new Lever(38, A0, mediator);
 
+  reporter = new Reporter(&Joystick);
+
   mediator->subscribe(lever);
   mediator->subscribe(firstButton);
+  mediator->subscribe(reporter);
 
   firstButton->init();
   lever->init();
   lever->printState();
 
-  Serial.flush();
+  Joystick.begin(false);
+  Joystick.setXAxisRange(0, 255);
+  Joystick.setXAxis(98);
+
+  reporter->init();
 
   Serial.println();
   Serial.println("==========================");
@@ -46,4 +59,6 @@ void loop() {
   heartbeat->act();
   firstButton->act();
   lever->act();
+
+  Joystick.sendState();
 }
