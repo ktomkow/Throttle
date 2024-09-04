@@ -88,7 +88,7 @@ unsigned short Lever::recalculateLogicalState() {
     valueToMap = _minPhysicalRead;
   }
 
-  return map(_physicalState, _minPhysicalRead, _maxPhysicalRead, _minLogicRead, _maxLogicRead);
+  return map(valueToMap, _minPhysicalRead, _maxPhysicalRead, _minLogicRead, _maxLogicRead);
 }
 
 unsigned short Lever::makeRead() {
