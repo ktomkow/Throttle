@@ -24,8 +24,8 @@ void Lever::printState() {
   Serial.print(" is initialized: ");
   Serial.println(_isInitialized);
 
-  Serial.print("State: ");
-  Serial.println(_state);
+  Serial.print("Physical State: ");
+  Serial.println(_physicalState);
 
   Serial.print("Min read: ");
   Serial.print(_minRead);
@@ -43,7 +43,7 @@ void Lever::init() {
   Serial.println(" initialization STARTED");
 
   _isInitialized = true;
-  _state = analogRead(_pin);
+  _physicalState = analogRead(_pin);
 
   Serial.print("Lever: ");
   Serial.print(_id);
@@ -58,7 +58,7 @@ void Lever::act() {
     return;
   }
 
-  _state = analogRead(_pin);
+  _physicalState = analogRead(_pin);
 }
 
 void Lever::handle(const ButtonStateChangedPayload& payload) {

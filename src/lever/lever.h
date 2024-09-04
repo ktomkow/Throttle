@@ -12,7 +12,7 @@ private:
   bool _isInitialized;
   unsigned short _id;
   int _pin;
-  unsigned short _state = 0;
+  unsigned short _physicalState = 0;
   unsigned short _minRead = 0;
   unsigned short _maxRead = 1023;
 
