@@ -80,8 +80,8 @@ void Button::onInactiveStateEntered() {
   publish();
 }
 
-BusMessage Button::createPayload() {
-  BusMessage message;
+Message Button::createPayload() {
+  Message message;
   message.type = MSG_BUTTON_STATE_CHANGED;
   message.payload.buttonStateChangePayload.id = _id;
   message.payload.buttonStateChangePayload.state = _state;
@@ -90,6 +90,6 @@ BusMessage Button::createPayload() {
 }
 
 void Button::publish() {
-  BusMessage busMessage = createPayload();
-  _bus->publish(busMessage);
+  Message message = createPayload();
+  _bus->publish(message);
 }

@@ -8,7 +8,7 @@
 
 class MessageBus {
 private:
-  BusMessage* _messages;
+  Message* _messages;
   unsigned short _capacity;
   unsigned short _size;
   void extend();
@@ -17,12 +17,12 @@ public:
   MessageBus();
   ~MessageBus();
 
-  void publish(const BusMessage& busMessage);
+  void publish(const Message&);
   void clear();
   bool isAny();
   void printStats();
   unsigned short getSize();
-  BusMessage& operator[](unsigned short index) const;
+  Message& operator[](unsigned short) const;
 };
 
 

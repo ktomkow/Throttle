@@ -6,7 +6,7 @@ MessageBus::MessageBus() {
 
   _size = 0;
   _capacity = 4;
-  _messages = new BusMessage[_capacity];
+  _messages = new Message[_capacity];
 
   Serial.println("MessageBus initialization FINISHED");
 }
@@ -15,15 +15,15 @@ MessageBus::~MessageBus() {
   delete[] _messages;
 }
 
-void MessageBus::publish(const BusMessage& busMessage) {
+void MessageBus::publish(const Message& message) {
   if (_size >= _capacity) {
     extend();
   }
 
-  _messages[_size++] = busMessage;
+  _messages[_size++] = message;
 }
 
-BusMessage& MessageBus::operator[](unsigned short index) const {
+Message& MessageBus::operator[](unsigned short index) const {
   return _messages[index];
 }
 
@@ -32,7 +32,7 @@ void MessageBus::clear() {
   _messages = nullptr;
   _size = 0;
   _capacity = 4;
-  _messages = new BusMessage[_capacity];
+  _messages = new Message[_capacity];
 }
 
 bool MessageBus::isAny() {
@@ -45,7 +45,7 @@ unsigned short MessageBus::getSize() {
 
 void MessageBus::extend() {
   _capacity = _capacity + 2;
-  BusMessage* newMessages = new BusMessage[_capacity];
+  Message* newMessages = new Message[_capacity];
 
   for (unsigned short i = 0; i < _size; ++i) {
     newMessages[i] = _messages[i];

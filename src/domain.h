@@ -8,7 +8,7 @@ enum InputState {
 };
 
 
-enum BusMessageType {
+enum MessageType {
   MSG_EMPTY_MESSAGE = 0,
   MSG_CONFIG_MODE_CHANGED = 1,
   MSG_BUTTON_STATE_CHANGED = 2,
@@ -35,8 +35,8 @@ union Payload {
   ConfigModeChangedPayload configModeChangedPayload;
 };
 
-struct BusMessage {
-  BusMessageType type;
+struct Message {
+  MessageType type;
   Payload payload;
 };
 
