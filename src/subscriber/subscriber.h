@@ -10,7 +10,7 @@ static unsigned short subscriberCounter = 0;
 class Subscriber {
 
 protected:
-  unsigned short _id;
+  unsigned short _subscriberId;
   virtual void handle(const ButtonStateChangedPayload&) {}
   virtual void handle(const PotentiometerStateChangedPayload&) {}
   virtual void handle(const ConfigModeChangedPayload&) {}
@@ -18,7 +18,7 @@ protected:
 public:
   Subscriber();
   void handle(const Message&);
-  unsigned short getId();
+  unsigned short getSubscriberId();
 };
 
 #endif
