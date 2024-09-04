@@ -2,12 +2,12 @@
 #include "./src/printer/printer.h"
 #include "./src/heartbeat/heartbeat.h"
 #include "./src/messageBus/messageBus.h"
-#include "./src/subscriber/subscriber.h"
+#include "./src/debugSubscriber/debugSubscriber.h"
 #include "./src/button/button.h"
 
 Heartbeat* heartbeat;
 MessageBus* messageBus;
-Subscriber* subscriber;
+DebugSubscriber* subscriber;
 Button* firstButton;
 
 void setup() {
@@ -20,7 +20,7 @@ void setup() {
   heartbeat = new Heartbeat();
 
   messageBus = new MessageBus();
-  subscriber = new Subscriber(messageBus);
+  subscriber = new DebugSubscriber(messageBus);
 
   firstButton = new Button(messageBus, 2, 2);
 
