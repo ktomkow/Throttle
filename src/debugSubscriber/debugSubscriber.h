@@ -1,5 +1,5 @@
-#ifndef SUBSCRIBER_H
-#define SUBSCRIBER_H
+#ifndef DEBUGSUBSCRIBER_H
+#define DEBUGSUBSCRIBER_H
 
 #include "Arduino.h"
 
@@ -7,12 +7,12 @@
 #include "../messageBus/messageBus.h"
 #include "../printer/printer.h"
 
-class Subscriber {
+class DebugSubscriber {
   private:
     MessageBus* _bus;
 
   public:
-    Subscriber(const MessageBus* bus);
+    DebugSubscriber(const MessageBus* bus);
     void act();
 };
 
