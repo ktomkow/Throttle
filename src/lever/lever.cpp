@@ -35,16 +35,22 @@ void Lever::printState() {
 }
 
 void Lever::init() {
-  Serial.print("Lever ");
+  Serial.println("***********************");
+  Serial.print("Lever: ");
   Serial.print(_id);
+  Serial.print(" on PIN: ");
+  Serial.print(_pin);
   Serial.println(" initialization STARTED");
 
   _isInitialized = true;
   _state = analogRead(_pin);
 
-  Serial.print("Lever ");
+  Serial.print("Lever: ");
   Serial.print(_id);
+  Serial.print(" on PIN: ");
+  Serial.print(_pin);
   Serial.println(" initialization FINISHED");
+  Serial.println("***********************");
 }
 
 void Lever::act() {

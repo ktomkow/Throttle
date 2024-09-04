@@ -4,12 +4,13 @@
 #include "Arduino.h"
 
 #include "../domain.h"
-#include "../messageBus/messageBus.h"
+#include "../subscriber/subscriber.h"
+#include "../publisher/publisher.h"
+#include "../mediator/mediator.h"
 
-class Button {
+class Button : public Subscriber, public Publisher {
 private:
   short _id;
-  MessageBus* _bus;
   const unsigned int _hysteresisMillis = 50;
   InputState _state;
   InputState _lastRead;
@@ -24,7 +25,7 @@ protected:
   void publish();
 
 public:
-  Button(MessageBus* bus, int pin, short id);
+  Button(unsigned short id, int pin, const Mediator* mediator);
   int getPin();
   void act();
   void init();
