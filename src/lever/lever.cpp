@@ -73,7 +73,7 @@ void Lever::act() {
 }
 
 void Lever::handle(const ButtonStateChangedPayload& payload) {
-  if (payload.state == ACTIVE_INPUT_STATE) {
+  if (payload.state == ACTIVE_INPUT_STATE && payload.id == 9) {
     calibrate();
   }
 }
