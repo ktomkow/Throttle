@@ -16,7 +16,6 @@ Joystick_ Joystick;
 Heartbeat* heartbeat;
 Mediator* mediator;
 Button* buttons[BUTTONS_COUNT];
-// Lever* lever;
 Lever* levers[LEVERS_COUNT];
 Reporter* reporter;
 
@@ -54,8 +53,6 @@ void setup() {
   buttons[8] = new Button(8, 15, mediator);
   buttons[9] = new Button(9, 16, mediator);
 
-  // lever = new Lever(38, A0, mediator);
-
   levers[0] = new Lever(40, A0, mediator);
   levers[1] = new Lever(41, A1, mediator);
   levers[2] = new Lever(42, A2, mediator);
@@ -65,7 +62,6 @@ void setup() {
 
   reporter = new Reporter(&Joystick);
 
-  // mediator->subscribe(lever);
   mediator->subscribe(reporter);
   
   for (unsigned short i = 0; i < BUTTONS_COUNT; i++) {
@@ -75,9 +71,6 @@ void setup() {
   for (unsigned short i = 0; i < LEVERS_COUNT; i++) {
     mediator->subscribe(levers[i]);
   }
-
-  // lever->init();
-  // lever->printState();
 
   for (unsigned short i = 0; i < BUTTONS_COUNT; i++) {
     buttons[i]->init();
@@ -99,7 +92,6 @@ void setup() {
 
 void loop() {
   heartbeat->act();
-  // lever->act();
 
   for (unsigned short i = 0; i < BUTTONS_COUNT; i++) {
     buttons[i]->act();
