@@ -9,13 +9,15 @@
 #include <Joystick.h>
 
 #define BUTTONS_COUNT 10
+#define LEVERS_COUNT 6
 
 Joystick_ Joystick;
 
 Heartbeat* heartbeat;
 Mediator* mediator;
 Button* buttons[BUTTONS_COUNT];
-Lever* lever;
+// Lever* lever;
+Lever* levers[LEVERS_COUNT];
 Reporter* reporter;
 
 void setup() {
@@ -29,7 +31,14 @@ void setup() {
 
   Serial.println("Joystick initialization STARTED");
   Joystick.begin(false);
+
   Joystick.setXAxisRange(0, 255);
+  Joystick.setYAxisRange(0, 255);
+  Joystick.setZAxisRange(0, 255);
+  Joystick.setRxAxisRange(0, 255);
+  Joystick.setRyAxisRange(0, 255);
+  Joystick.setRzAxisRange(0, 255);
+
   Serial.println("Joystick initialization FINISHED");
 
   mediator = new Mediator();
@@ -45,22 +54,37 @@ void setup() {
   buttons[8] = new Button(8, 15, mediator);
   buttons[9] = new Button(9, 16, mediator);
 
-  lever = new Lever(38, A0, mediator);
+  // lever = new Lever(38, A0, mediator);
+
+  levers[0] = new Lever(40, A0, mediator);
+  levers[1] = new Lever(41, A1, mediator);
+  levers[2] = new Lever(42, A2, mediator);
+  levers[3] = new Lever(43, A3, mediator);
+  levers[4] = new Lever(44, 8, mediator);
+  levers[5] = new Lever(45, 9, mediator);
 
   reporter = new Reporter(&Joystick);
 
-  mediator->subscribe(lever);
+  // mediator->subscribe(lever);
   mediator->subscribe(reporter);
   
   for (unsigned short i = 0; i < BUTTONS_COUNT; i++) {
     mediator->subscribe(buttons[i]);
   }
 
-  lever->init();
-  lever->printState();
+  for (unsigned short i = 0; i < LEVERS_COUNT; i++) {
+    mediator->subscribe(levers[i]);
+  }
+
+  // lever->init();
+  // lever->printState();
 
   for (unsigned short i = 0; i < BUTTONS_COUNT; i++) {
     buttons[i]->init();
+  }
+
+    for (unsigned short i = 0; i < LEVERS_COUNT; i++) {
+    levers[i]->init();
   }
 
   reporter->init();
@@ -75,10 +99,14 @@ void setup() {
 
 void loop() {
   heartbeat->act();
-  lever->act();
+  // lever->act();
 
   for (unsigned short i = 0; i < BUTTONS_COUNT; i++) {
     buttons[i]->act();
+  }
+  
+  for (unsigned short i = 0; i < LEVERS_COUNT; i++) {
+    levers[i]->act();
   }
 
   Joystick.sendState();

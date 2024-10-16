@@ -27,5 +27,27 @@ void Reporter::handle(const PotentiometerStateChangedPayload& payload) {
     return;
   }
 
-  _joystick->setXAxis(payload.state);
+  switch (payload.id) {
+    case 40:
+      _joystick->setXAxis(payload.state);
+      break;
+    case 41:
+      _joystick->setYAxis(payload.state);
+      break;
+    case 42:
+      _joystick->setZAxis(payload.state);
+      break;
+    case 43:
+      _joystick->setRxAxis(payload.state);
+      break;
+    case 44:
+      _joystick->setRyAxis(payload.state);
+      break;
+    case 45:
+      _joystick->setRzAxis(payload.state);
+      break;
+    default:
+      break;
+  }
+  // _joystick->setXAxis(payload.state);
 }
