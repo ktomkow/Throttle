@@ -53,12 +53,12 @@ void setup() {
   buttons[8] = new Button(8, 15, mediator);
   buttons[9] = new Button(9, 16, mediator);
 
-  levers[0] = new Lever(true, 40, A0, mediator);
-  levers[1] = new Lever(41, A1, mediator);
-  levers[2] = new Lever(42, A2, mediator);
-  levers[3] = new Lever(43, A3, mediator);
-  levers[4] = new Lever(44, 8, mediator);
-  levers[5] = new Lever(45, 9, mediator);
+  levers[0] = new Lever(40, A0, true, mediator);
+  levers[1] = new Lever(41, A1, false, mediator);
+  levers[2] = new Lever(42, A2, false, mediator);
+  levers[3] = new Lever(43, A3, false, mediator);
+  levers[4] = new Lever(44, 8, false, mediator);
+  levers[5] = new Lever(45, 9, false, mediator);
 
   reporter = new Reporter(&Joystick);
 

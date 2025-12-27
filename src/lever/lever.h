@@ -6,6 +6,7 @@
 #include "../subscriber/subscriber.h"
 #include "../publisher/publisher.h"
 #include "../mediator/mediator.h"
+#include "../filter/filter.h"
 
 class Lever : public Subscriber, public Publisher {
 private:
@@ -25,13 +26,13 @@ private:
   void reportLogicalState();
   unsigned short makeRead();
   void calibrate();
+  Filter* _filter;
 
 protected:
   virtual void handle(const ButtonStateChangedPayload&) override;
 
 public:
-  Lever(unsigned short id, int pin, const Mediator* mediator);
-  Lever(bool useDebugOutput, unsigned short id, int pin, const Mediator* mediator);
+  Lever(unsigned short id, int pin, bool useDebugOutput, const Mediator* mediator);
 
   void printState();
   void init();

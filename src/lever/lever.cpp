@@ -1,22 +1,6 @@
 #include "./lever.h"
 
-Lever::Lever(unsigned short id, int pin, const Mediator* mediator)
-  : Publisher(mediator) {
-  Serial.print("Lever ");
-  Serial.print(id);
-  Serial.println(" constructor STARTED");
-
-  _id = id;
-  _pin = pin;
-  _isInitialized = false;
-  _useDebugOutput = false;
-
-  Serial.print("Lever ");
-  Serial.print(id);
-  Serial.println(" constructor FINISHED");
-}
-
-Lever::Lever(bool useDebugOutput, unsigned short id, int pin, const Mediator* mediator)
+Lever::Lever(unsigned short id, int pin, bool useDebugOutput, const Mediator* mediator)
   : Publisher(mediator) {
   Serial.print("Lever ");
   Serial.print(id);
@@ -26,6 +10,7 @@ Lever::Lever(bool useDebugOutput, unsigned short id, int pin, const Mediator* me
   _pin = pin;
   _isInitialized = false;
   _useDebugOutput = useDebugOutput;
+  _filter = new Filter();
 
   Serial.print("Lever ");
   Serial.print(id);
@@ -85,16 +70,22 @@ void Lever::act() {
     return;
   }
 
+  // todo: change this - when trend is continuous diff should be smaller
+  // do not report if difference is small
+  unsigned short diff = (_logicState > logicState) ? _logicState - logicState : logicState - _logicState;
+  if (diff < 3) {
+    return;
+  }
+
   _logicState = logicState;
   reportLogicalState();
-    
-    if(_useDebugOutput) {
-        Serial.print("Lever_");
-        Serial.print(_id);
-        Serial.print(":");
-        Serial.println(_logicState);
-    }
 
+  if (_useDebugOutput) {
+    Serial.print("Lever_");
+    Serial.print(_id);
+    Serial.print(":");
+    Serial.println(_logicState);
+  }
 }
 
 void Lever::handle(const ButtonStateChangedPayload& payload) {
@@ -117,7 +108,8 @@ unsigned short Lever::recalculateLogicalState() {
 }
 
 unsigned short Lever::makeRead() {
-  return analogRead(_pin);
+  unsigned short readValue = analogRead(_pin);
+  return _filter->process(readValue);
 }
 
 void Lever::reportLogicalState() {
