@@ -10,6 +10,7 @@
 class Lever : public Subscriber, public Publisher {
 private:
   bool _isInitialized;
+  bool _useDebugOutput;
   unsigned short _id;
   int _pin;
   unsigned short _physicalState = 0;
@@ -30,6 +31,8 @@ protected:
 
 public:
   Lever(unsigned short id, int pin, const Mediator* mediator);
+  Lever(bool useDebugOutput, unsigned short id, int pin, const Mediator* mediator);
+
   void printState();
   void init();
   void act();

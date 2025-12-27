@@ -9,6 +9,23 @@ Lever::Lever(unsigned short id, int pin, const Mediator* mediator)
   _id = id;
   _pin = pin;
   _isInitialized = false;
+  _useDebugOutput = false;
+
+  Serial.print("Lever ");
+  Serial.print(id);
+  Serial.println(" constructor FINISHED");
+}
+
+Lever::Lever(bool useDebugOutput, unsigned short id, int pin, const Mediator* mediator)
+  : Publisher(mediator) {
+  Serial.print("Lever ");
+  Serial.print(id);
+  Serial.println(" constructor STARTED");
+
+  _id = id;
+  _pin = pin;
+  _isInitialized = false;
+  _useDebugOutput = useDebugOutput;
 
   Serial.print("Lever ");
   Serial.print(id);
@@ -70,6 +87,14 @@ void Lever::act() {
 
   _logicState = logicState;
   reportLogicalState();
+    
+    if(_useDebugOutput) {
+        Serial.print("Lever_");
+        Serial.print(_id);
+        Serial.print(":");
+        Serial.println(_logicState);
+    }
+
 }
 
 void Lever::handle(const ButtonStateChangedPayload& payload) {

@@ -53,7 +53,7 @@ void setup() {
   buttons[8] = new Button(8, 15, mediator);
   buttons[9] = new Button(9, 16, mediator);
 
-  levers[0] = new Lever(40, A0, mediator);
+  levers[0] = new Lever(true, 40, A0, mediator);
   levers[1] = new Lever(41, A1, mediator);
   levers[2] = new Lever(42, A2, mediator);
   levers[3] = new Lever(43, A3, mediator);
@@ -91,7 +91,7 @@ void setup() {
 }
 
 void loop() {
-  heartbeat->act();
+  // heartbeat->act();
 
   for (unsigned short i = 0; i < BUTTONS_COUNT; i++) {
     buttons[i]->act();
