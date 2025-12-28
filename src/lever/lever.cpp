@@ -62,18 +62,22 @@ void Lever::act() {
     return;
   }
 
-  _physicalState = makeRead();
+  unsigned short physicalState = makeRead();
+  if (physicalState == _physicalState) {
+    return;
+  }
+
+  // todo: check trend not only difference
+  unsigned short diff = (_physicalState > physicalState) ? _physicalState - physicalState : physicalState - _physicalState;
+  if (diff < 5) {
+    return;
+  }
+
+  _physicalState = physicalState;
   unsigned short logicState = recalculateLogicalState();
 
   // do not report if nothing changed
   if (logicState == _logicState) {
-    return;
-  }
-
-  // todo: change this - when trend is continuous diff should be smaller
-  // do not report if difference is small
-  unsigned short diff = (_logicState > logicState) ? _logicState - logicState : logicState - _logicState;
-  if (diff < 3) {
     return;
   }
 
